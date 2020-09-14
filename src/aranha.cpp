@@ -1,54 +1,17 @@
-#include<Wire.h>
-#include <Adafruit_PWMServoDriver.h>
-#include"aranha.h"
-#include"math.h"
+#include"aranha.hpp"
 
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
-#define SERVOMIN  140 // this is the 'minimum' pulse length count (out of 4096)
-#define SERVOMAX  500 // this is the 'maximum' pulse length count (out of 4096)
+
 
 //Tamanho dos elos
 #define L1 8
 #define L2 10
+Adafruit_PWMServoDriver pwm;
 
 //Define a estrutura geral do robo, passando o numero de pernas e o numero de motores por perna
 //Configura as juntas e offsets, deve ser passado um vetor com uma sequencia de ligamentos indo da base até o chao, perna por perna
 //Exemplo : C1,C2,C3,J1,J2,J3,P1,P2,P3 para tres pata, cada uma contendo e ligacoes (C,J e P);
-aranha::aranha(int numpata,int nummotores,int *lig,int *offs)
-{
-
-  for (int i=0;i<=(numpata-1);i++)
-  {
-    // *(coxa+i)=*(lig+i);
-    // *(joelho+i)=*(lig+i+ numpata);
-    // *(pata+i)=*(lig+i+ numpata*2);
-    coxa[i]=lig[i];
-    joelho[i]=lig[i+4];
-    pata[i]=lig[i+8];
-  }
-  // for(int i =0;i<=3;i++)
-  // {
-  //   Serial.println(coxa[i]);
-  //   delay(500);
-  //   }
-  //   for(int i =0;i<=3;i++)
-  //   {
-  //     Serial.println(joelho[i]);
-  //     delay(500);
-  //     }
-  //     for(int i =0;i<=3;i++)
-  //     {
-  //       Serial.println(pata[i]);
-  //       delay(500);
-  //       }
-
-    for (int i=0;i<=(numpata-1);i++)
-    {
-      coxa_offs[i]=offs[i];
-      joelho_offs[i]=offs[i+4];
-      pata_offs[i]=offs[i+8];
-    }
-  }
+aranha::aranha()
+{}
 
 
 //FAz a cinematica inversa pra determinar a distancia e altura da ponta do pé em relacao ao servo do joelho
