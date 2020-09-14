@@ -1,17 +1,17 @@
--ID:/Github/Robo_aranha/include
--ID:/Github/Robo_aranha/src
--ID:/Github/Robo_aranha/.pio/libdeps/uno/Adafruit PWM Servo Driver Library
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/libraries/Wire/src
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/cores/arduino
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/variants/standard
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/libraries/HID/src
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/libraries/SPI/src
--IC:/Users/T-Gamer/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src
--IC:/Users/T-Gamer/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include
--IC:/Users/T-Gamer/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include-fixed
--IC:/Users/T-Gamer/.platformio/packages/toolchain-atmelavr/avr/include
--IC:/Users/T-Gamer/.platformio/packages/tool-unity
+-I/home/leo/github/Robo_aranha/include
+-I/home/leo/github/Robo_aranha/src
+-I/home/leo/github/Robo_aranha/.pio/libdeps/uno/Adafruit PWM Servo Driver Library
+-I/home/leo/.platformio/packages/framework-arduino-avr/libraries/Wire/src
+-I/home/leo/.platformio/packages/framework-arduino-avr/cores/arduino
+-I/home/leo/.platformio/packages/framework-arduino-avr/variants/standard
+-I/home/leo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src
+-I/home/leo/.platformio/packages/framework-arduino-avr/libraries/HID/src
+-I/home/leo/.platformio/packages/framework-arduino-avr/libraries/SPI/src
+-I/home/leo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src
+-I/home/leo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include-fixed
+-I/home/leo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/5.4.0/include
+-I/home/leo/.platformio/packages/toolchain-atmelavr/avr/include
+-I/home/leo/.platformio/packages/tool-unity
 -DPLATFORMIO=50001
 -DARDUINO_AVR_UNO
 -DF_CPU=16000000L
