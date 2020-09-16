@@ -1,14 +1,11 @@
-#include"aranha.hpp"
+#include"spider.hpp"
 
-int ligacoes[NUMPATAS*NUMMOTORES]={C_1,C_2,C_3,C_4,J_1,J_2,J_3,J_4,P_1,P_2,P_3,P_4};
-int offsets[NUMPATAS*NUMMOTORES]={C_1_OFF,C_2_OFF,C_3_OFF,C_4_OFF,J_1_OFF,J_2_OFF,J_3_OFF,J_4_OFF,P_1_OFF,P_2_OFF,P_3_OFF,P_4_OFF};
-aranha aranha1;
+spiderbot aranha;
 
 void setup() {
   Serial.begin(9600);
-  aranha1.begin();
-
-
+  aranha.begin();
+  // aranha.setToInitialPosition();
 }
 
 
@@ -31,21 +28,78 @@ void loop() {
     // aranha.movePolar(0,18,0,30);
     // aranha.posInicial();
     // delay(500);
-    for(int i=0;i<=3;i++)
-    {
-      aranha1.frente(i,4, 10,30,500);
-      delay(200);
-      // aranha.moveAngle(aranha.pata[i],125,aranha.pata_offs[i]);
-      // delay(500);
+    for(int j=0;j<=3;j++){
+    // for(int i=1;i<=2;i++){
+      // aranha.moveLimbPolar(robot0.limbs[i],8, 5, 90);
+      aranha._moveJointAngle(robot0.limbs[j].joints[0],90);
+      aranha._moveJointAngle(robot0.limbs[j].joints[1],150);
+      // delay(50);
+      aranha._moveJointAngle(robot0.limbs[j].joints[2],180);
     }
+
+    delay(5000);
+  // }
     // delay(2000);
-    // for(int i=0;i<=3;i++)
-    // {
-    //   aranha.movePolar(i,7,15,90);
-    //   // aranha.moveAngle(aranha.pata[i],125,aranha.pata_offs[i]);
-    //   // delay(500);
-    // }
-    // delay(2000);
+    for(int j=0;j<=3;j++)
+    {
+      // delay(100);
+      aranha._moveJointAngle(robot0.limbs[j].joints[1],90);
+      aranha._moveJointAngle(robot0.limbs[j].joints[2],180);
+    }
+    delay(2000);
+    for(int j=0;j<=3;j++)
+    {
+      // delay(100);
+      aranha._moveJointAngle(robot0.limbs[j].joints[1],45);
+      aranha._moveJointAngle(robot0.limbs[j].joints[2],135);
+    }
+    delay(3000);
+    while(1){
+  //   aranha._moveJointAngle(robot0.limbs[0].joints[1],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[0].joints[1],45);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[1].joints[1],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[1].joints[1],45);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[2].joints[1],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[2].joints[1],45);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[3].joints[1],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[3].joints[1],45);
+  //   delay(100);
+  //   //
+  //   //
+  //   //
+  //   //
+  //   //
+  //   aranha._moveJointAngle(robot0.limbs[0].joints[0],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[1].joints[0],45);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[2].joints[0],135);
+  //   delay(100);
+  //   aranha._moveJointAngle(robot0.limbs[3].joints[0],45);
+  //   delay(100);
+  for(int j=0;j<=3;j++)
+  {
+    aranha._moveJointAngle(robot0.limbs[j].joints[0],45);
+    delay(100);
+    aranha._moveJointAngle(robot0.limbs[j].joints[0],90);
+    delay(100);
+  }
+  }
+
+    delay(1000);
+    for(int j=0;j<=3;j++)
+    {
+      aranha._moveJointAngle(robot0.limbs[j].joints[1],90);
+      aranha._moveJointAngle(robot0.limbs[j].joints[2],180);
+    }
+    delay(5000);
   // }
 
   // delay(2000);
