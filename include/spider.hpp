@@ -76,7 +76,7 @@ static joint thigh0
 {
   T_0,
   T_0_OFF,
-  false
+  true
 };
 static joint thigh1
 {
@@ -88,7 +88,7 @@ static joint thigh2
 {
   T_2,
   T_2_OFF,
-  false
+  true
 };
 static joint thigh3
 {
@@ -174,6 +174,7 @@ struct limbPosition
   int kneeAngle;
   int footAngle;
 };
+void command_by_serial_PolarPosition(struct spiderbot aranha1);
 
 class spiderbot
 {
@@ -181,11 +182,16 @@ public:
   void begin();
   void moveLimbPolar(limb _limb, double r, double z, double theta);
   void setToInitialPosition();
+  void standUp();
+  void goDoggy();
+  void rest();
+  void riseSlowly();
   void moveAngle(int junta, int grau,int off);
   void frente(int junta,int dist,int alt_atual,int amp,int vel);
+  body body0 = robot0;
 
 // private:
-  body body0 = robot0;
+
   void _moveJointAngle(joint _joint, int degree);
   void _setLimbPosition(limb _limb, limbPosition desired_position);
   void _inverseKinematic(double x,double y, int* a1, int* a2);
