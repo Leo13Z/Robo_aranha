@@ -24,7 +24,7 @@ void spiderbot::_inverseKinematic(double x,double y, int* a1, int* a2)
   alpha1 = int((alpha1 + alpha2)* (180 / PI));
 
   alpha2 = int(acos((-(L1*L1)-(L2*L2)+(B*B))/(-2*L2*L1))* (180 / PI));
-  alpha2 = int(180 -alpha2 +45);
+  alpha2 = int(180 -alpha2 +0);//45
 
   if ((alpha1>0) && (alpha1<180)){
     *a1=alpha1;
@@ -40,7 +40,7 @@ void spiderbot::_moveJointAngle(joint _joint, int degree)
   int internal_degree = degree + _joint.servo_offset;
   if (_joint.bIsInverted)
   {
-    internal_degree = 180 - internal_degree;
+    internal_degree = 180 - degree + _joint.servo_offset;
   }
     pwm.setPWM(_joint.servo_num,0,(map(internal_degree,0,180,SERVOMIN,SERVOMAX)));
 }
@@ -101,18 +101,18 @@ void spiderbot::riseSlowly()
 
 void spiderbot::rest()
 {
-  for(int i=0; i<=3; i++)
-  {
-    moveLimbPolar(robot0.limbs[i], 5, 8, 90);
-  }
-  delay(500);
-  for(int i=0; i<=3; i++)
-  {
-    moveLimbPolar(robot0.limbs[i], 5, 6, 90);
-  }
-  delay(500);
+  // for(int i=0; i<=3; i++)
+  // {
+  //   moveLimbPolar(robot0.limbs[i], 5, 8, 90);
+  // }
+  // delay(500);
+  // for(int i=0; i<=3; i++)
+  // {
+  //   moveLimbPolar(robot0.limbs[i], 5, 6, 90);
+  // }
+  // delay(500);
   double a;
-  for (int j = 600;j>350;j--){
+  for (int j = 1500;j>350;j=j-10){
     for(int i=0; i<=3; i++)
       {
       a=double(j);
@@ -125,7 +125,7 @@ void spiderbot::goDoggy()
 {
   for(int i=0; i<=3; i++)
   {
-    moveLimbPolar(robot0.limbs[i], 5, 12, 45);
+    moveLimbPolar(robot0.limbs[i], 5, 12, 135);
   }
 }
 

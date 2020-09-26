@@ -36,20 +36,20 @@ A very beatiful description will go here in the nearby future
 #define F_3 11
 //  - - - - - -This defines the angular offset in each servo due to assembly- //
 //I dont know if this is correct, must check
-#define T_0_OFF 0
-#define T_1_OFF 0
-#define T_2_OFF 0
-#define T_3_OFF 0
+#define T_0_OFF -5
+#define T_1_OFF -5
+#define T_2_OFF -10
+#define T_3_OFF -3
 
-#define K_0_OFF -20 //OK
-#define K_1_OFF 20 //OK
-#define K_2_OFF -10// OK
-#define K_3_OFF 15 //OK
+#define K_0_OFF -10 //OK
+#define K_1_OFF 5 //OK
+#define K_2_OFF -7// OK
+#define K_3_OFF 7 //OK
 
-#define F_0_OFF -20 // OK
-#define F_1_OFF -18
-#define F_2_OFF -8
-#define F_3_OFF 0 //OK
+#define F_0_OFF 5 // OK
+#define F_1_OFF -5
+#define F_2_OFF -5
+#define F_3_OFF 7 //OK
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 //  - - - - - -Structures representing the robot configuration  - - - - - - - //
