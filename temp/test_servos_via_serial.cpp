@@ -20,7 +20,6 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define P_3 10
 #define P_4 11
 
-int offset[12] = {0, 0, 0, 0, 20, 20, 10, 20, }
 
 int perna1[3]={C_1,J_1,P_1};
 int perna2[3]={C_2,J_2,P_2};

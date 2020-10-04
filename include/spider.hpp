@@ -48,7 +48,7 @@ A very beatiful description will go here in the nearby future
 
 #define F_0_OFF 5 // OK
 #define F_1_OFF -5
-#define F_2_OFF -5
+#define F_2_OFF 5
 #define F_3_OFF 7 //OK
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
@@ -64,6 +64,7 @@ struct joint
 struct limb
 {
   joint joints[NUM_SERVOS_PER_LEG];
+  float angles[NUM_SERVOS_PER_LEG];
 };
 
 struct body
@@ -174,25 +175,139 @@ struct limbPosition
   int kneeAngle;
   int footAngle;
 };
+
+
+// struct robotConfiguration
+// {
+//   limbPosition leg[NUM_LEGS];
+// };
+//
+//
+// static robotConfiguration configuration0;
+
+
 void command_by_serial_PolarPosition(struct spiderbot aranha1);
 
 class spiderbot
 {
 public:
   void begin();
-  void moveLimbPolar(limb _limb, double r, double z, double theta);
+  void moveLimbPolar(limb* _limb, double r, double z, double theta);
   void setToInitialPosition();
   void standUp();
   void goDoggy();
   void rest();
   void riseSlowly();
+  void assumeStablePosition();
   void moveAngle(int junta, int grau,int off);
   void frente(int junta,int dist,int alt_atual,int amp,int vel);
-  body body0 = robot0;
+  void creepingGait(int stepSize, int n_steps);
+
+  body body0;
 
 // private:
 
   void _moveJointAngle(joint _joint, int degree);
-  void _setLimbPosition(limb _limb, limbPosition desired_position);
-  void _inverseKinematic(double x,double y, int* a1, int* a2);
+  void _setLimbPosition(limb* _limb, float* desired);
+  void _inverseKinematic(double x,double y, float* a1, float* a2);
+};
+
+static spiderbot spider0
+{
+  body body0 = robot0;
+};
+
+
+
+class Point
+{
+public:
+  Point();
+  Point(float x, float y, float z);
+
+  static float GetDistance(Point point1, Point point2);
+
+  volatile float x, y, z;
+};
+
+class RobotLegsPoints
+{
+public:
+  RobotLegsPoints();
+  RobotLegsPoints(Point leg1, Point leg2, Point leg3, Point leg4);
+
+  Point leg1, leg2, leg3, leg4;
+};
+
+class RobotJoint
+{
+public:
+  RobotJoint();
+  void Set(int servoNum, float offset, bool jointDir, float jointMinAngle, float jointMaxAngle);
+
+  void SetOffset(float offset);
+  void SetOffsetEnableState(bool state);
+
+  void RotateToDirectly(float jointAngle);
+
+  float GetJointAngle(float servoAngle);
+
+  bool CheckJointAngle(float jointAngle);
+
+  volatile float jointAngleNow;
+  volatile float servoAngleNow;
+
+  static int firstRotateDelay;
+
+private:
+  int servoNum;
+  float offset;
+  bool jointDir;
+  float jointMinAngle;
+  float jointMaxAngle;
+  int offsetAddress;
+  volatile float offset = 0;
+  volatile bool isOffsetEnable = true;
+  volatile bool isFirstRotate = true;
+};
+
+class RobotLeg
+{
+public:
+  RobotLeg();
+  void Set(float xOrigin, float yOrigin);
+
+  void SetOffsetEnableState(bool state);
+
+  void CalculatePoint(float alpha, float beta, float gamma, volatile float &x, volatile float &y, volatile float &z);
+  void CalculatePoint(float alpha, float beta, float gamma, Point &point);
+  void CalculateAngle(float x, float y, float z, float &alpha, float &beta, float &gamma);
+  void CalculateAngle(Point point, float &alpha, float &beta, float &gamma);
+
+  bool CheckPoint(Point point);
+  bool CheckAngle(float alpha, float beta, float gamma);
+
+  void MoveTo(Point point);
+  void MoveToRelatively(Point point);
+  void WaitUntilFree();
+
+  void ServosRotateTo(float degreeA, float degreeB, float degreeC);
+
+  void MoveToDirectly(Point point);
+  void MoveToDirectlyRelatively(Point point);
+
+  volatile bool isBusy = false;
+
+  RobotJoint jointA, jointB, jointC;
+  Point pointNow, pointGoal;
+
+  static constexpr float negligibleDistance = 0.1;
+  static constexpr float defaultStepDistance = 2;
+  volatile float stepDistance = defaultStepDistance;
+
+private:
+  float xOrigin, yOrigin;
+  volatile bool isFirstMove = true;
+
+  void RotateToDirectly(float alpha, float beta, float gamma);
 };
